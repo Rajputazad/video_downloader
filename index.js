@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 
 app.get('/download', async (req, res) => {
-  const videoUrl = req.query.url;
+  const videoUrl = req.query.url; // http://localhost:3000/download?url=https://youtube.com/watch?v=0G49Dgfxh-o
 //   const quality = req.query.quality || '360p';  // Default to highest video quality
   const quality = req.query.quality || 'lowestvideo';   // lowestaudio highestvideo lowestvideo highestaudio Default to highest video quality
   const format = req.query.format || 'mp4'; //mp3 mp4 
@@ -58,18 +58,18 @@ app.get('/download', async (req, res) => {
     res.status(500).send('Something went wrong');
   }
 });
-async function getAvailableQualities(videoUrl) {
-    try {
-      const info = await ytdl.getInfo(videoUrl);
-      const formats = info.formats;
-      const availableQualities = formats.map(format => format.resolution || format.audioBitrate);
-      console.log(availableQualities);
-    } catch (err) {
-      console.error('Error fetching video info:', err);
-    }
-  }
+// async function getAvailableQualities(videoUrl) {
+//     try {
+//       const info = await ytdl.getInfo(videoUrl);
+//       const formats = info.formats;
+//       const availableQualities = formats.map(format => format.resolution || format.audioBitrate);
+//       console.log(availableQualities);
+//     } catch (err) {
+//       console.error('Error fetching video info:', err);
+//     }
+//   }
   
-  getAvailableQualities('https://youtube.com/watch?v=0G49Dgfxh-o');
+//   getAvailableQualities('https://youtube.com/watch?v=0G49Dgfxh-o');
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
